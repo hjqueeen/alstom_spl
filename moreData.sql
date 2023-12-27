@@ -9,7 +9,6 @@ INSERT INTO Kunde (KundeID, Name, Email, Adresse) VALUES
 ('K12352', 'Lukas Weber', 'lukas.weber@email.com', 'Seeweg 8, Stadt'),
 ('K12353', 'Sophia Meyer', 'sophia.meyer@email.com', 'Bergstraße 9, Stadt'),
 ('K12354', 'Paul Schneider', 'paul.schneider@email.com', 'Flussufer 10, Stadt');
-;
 
 INSERT INTO Auftrag (AuftragID, KundeID, Bestelldatum, Lieferdatum, Status) VALUES 
 ('A38658', 'K12345', '2023-01-15', '2023-03-20', 'in Bearbeitung'),
@@ -48,7 +47,7 @@ INSERT INTO Produktionsplan (PlanID, AuftragID, Startdatum, Enddatum, Status) VA
 ('P47626', 'A38664', '2023-02-05', '2023-04-02', 'in Bearbeitung'),
 ('P47627', 'A38665', '2023-02-20', '2023-04-27', 'abgeschlossen'),
 ('P47628', 'A38666', '2023-02-25', '2023-05-01', 'in Bearbeitung'),
-('P47629', 'A38667', '2023-03-01', '2023-05-15', 'abgeschlossen');;
+('P47629', 'A38667', '2023-03-01', '2023-05-15', 'abgeschlossen');
 
 INSERT INTO Komponente (KomponenteID, Name, Typ, Lagerbestand) VALUES 
 ('K52784', 'Motor', 'Antrieb', 50),
@@ -61,7 +60,6 @@ INSERT INTO Komponente (KomponenteID, Name, Typ, Lagerbestand) VALUES
 ('K52791', 'Steuerung', 'Elektronik', 25),
 ('K52792', 'Lichter', 'Elektronik', 100),
 ('K52793', 'Räder', 'Mechanik', 80);
-;
 
 INSERT INTO AuftragZugmodell (AuftragID, ZugmodellID) VALUES
 ('A38660', 'Z59475'),
