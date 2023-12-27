@@ -12,8 +12,8 @@ CREATE TABLE Kunde (
 CREATE TABLE Auftrag (
     AuftragID VARCHAR(10),
     KundeID VARCHAR(10),
-    Bestelldatum DATE,
-    Lieferdatum DATE,
+    Bestelldatum TEXT, -- DATE
+    Lieferdatum TEXT, -- DATE
     Status VARCHAR(50)
 );
 
@@ -27,8 +27,8 @@ CREATE TABLE Zugmodell (
 CREATE TABLE Produktionsplan (
     PlanID VARCHAR(10),
     AuftragID VARCHAR(10),
-    Startdatum DATE,
-    Enddatum DATE,
+    Startdatum TEXT, -- DATE
+    Enddatum TEXT, -- DATE
     Status VARCHAR(50)
 );
 
