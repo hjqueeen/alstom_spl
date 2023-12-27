@@ -54,6 +54,7 @@ CREATE TABLE ProduktionsplanKomponente (
 -- ############# --
 -- INSERT VALUES --
 -- ############# --
+
 INSERT INTO Kunde (KundeID, Name, Email, Adresse) VALUES 
 ('K12345', 'Max Mueller', 'max.mueller@email.com', 'Musterstraße 1, Stadt'),
 ('K12346', 'Anna Schmidt', 'anna.schmidt@email.com', 'Beispielweg 2, Stadt');
@@ -86,6 +87,7 @@ INSERT INTO ProduktionsplanKomponente (PlanID, KomponenteID) VALUES
 -- ######## --
 -- ABFRAGEN --
 -- ######## --
+
 -- Um alle Auftraege eines bestimmten Kunden zusammen mit den Details des Zugmodells zu erhalten
 SELECT K.KundeID, K.Name, A.AuftragID, A.Bestelldatum, A.Lieferdatum, A.Status, Z.ZugmodellID, Z.Name AS ZugmodellName
 FROM Kunde K
@@ -94,26 +96,12 @@ JOIN AuftragZugmodell AZ ON A.AuftragID = AZ.AuftragID
 JOIN Zugmodell Z ON AZ.ZugmodellID = Z.ZugmodellID
 WHERE K.KundeID = 'K12345'; 
 
--- Um die Komponenten fuer einen bestimmten Produktionsplan zu erhalten
-SELECT P.PlanID, P.AuftragID, P.Startdatum, P.Enddatum, P.Status, K.KomponenteID, K.Name AS KomponentenName
-FROM Produktionsplan P
-JOIN ProduktionsplanKomponente PK ON P.PlanID = PK.PlanID
-JOIN Komponente K ON PK.KomponenteID = K.KomponenteID
-WHERE P.PlanID = 'P47620'; 
-
--- Um alle Komponenten und deren Lagerbestaende fuer jeden Zugmodelltyp zu erhalten
-SELECT Z.ZugmodellID, Z.Name AS ZugmodellName, K.KomponenteID, K.Name AS KomponentenName, K.Lagerbestand
-FROM Zugmodell Z
-JOIN AuftragZugmodell AZ ON Z.ZugmodellID = AZ.ZugmodellID
-JOIN ProduktionsplanKomponente PK ON AZ.AuftragID = PK.PlanID
-JOIN Komponente K ON PK.KomponenteID = K.KomponenteID;
-
 -- Um den Gesamtstatus der Produktionsplaene fuer jeden Auftrag anzuzeigen 
 SELECT A.AuftragID, A.KundeID, A.Bestelldatum, A.Lieferdatum, A.Status AS AuftragsStatus, P.PlanID, P.Status AS ProduktionsplanStatus
 FROM Auftrag A
 JOIN Produktionsplan P ON A.AuftragID = P.AuftragID;
 
---Um die Anzahl der Auftraege pro Kunde zu ermitteln
+-- Anzahl der Auftraege pro Kunde ermitteln
 SELECT K.KundeID, K.Name, COUNT(A.AuftragID) AS AnzahlAuftraege
 FROM Kunde K
 JOIN Auftrag A ON K.KundeID = A.KundeID 
@@ -129,3 +117,8 @@ FROM (
 ) AS P
 GROUP BY P.PlanID;
 
+-- Zugmodelle finden, deren Kapazitaet einen bestimmten Wert überschreitet
+SELECT Z.ZugmodellID, Z.Name, Z.Kapazitaet, AZ.AuftragID
+FROM Zugmodell Z
+JOIN AuftragZugmodell AZ ON Z.ZugmodellID = AZ.ZugmodellID
+WHERE Z.Kapazitaet > 200;
