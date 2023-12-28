@@ -3,55 +3,59 @@
 -- ############ --
 
 CREATE TABLE Kunde (
-    KundeID VARCHAR(10),
-    Name VARCHAR(100),
-    Email VARCHAR(100),
-    Adresse VARCHAR(100)
+    KundeID         VARCHAR(10),
+    Name            VARCHAR(100),
+    Email           VARCHAR(100),
+    Adresse         VARCHAR(100)
 );
 
 CREATE TABLE Auftrag (
-    AuftragID VARCHAR(10),
-    KundeID VARCHAR(10),
-    Bestelldatum TEXT, -- DATE
-    Lieferdatum TEXT, -- DATE
-    Status VARCHAR(50)
+    AuftragID       VARCHAR(10),
+    KundeID         VARCHAR(10),
+    Bestelldatum    TEXT, -- DATE 'YYYY-MM-DD'
+    Lieferdatum     TEXT, -- DATE 'YYYY-MM-DD'
+    Status          VARCHAR(50),
+    Gesamtpreis     DECIMAL(10, 2)
 );
 
 CREATE TABLE Zugmodell (
-    ZugmodellID VARCHAR(10),
-    Name VARCHAR(100),
-    Typ VARCHAR(50),
-    Kapazitaet INT
+    ZugID           VARCHAR(10),
+    Name            VARCHAR(100),
+    Typ             VARCHAR(50),
+    Kapazitaet      INT,
+    Preis           DECIMAL(10, 2)
 );
 
 CREATE TABLE Produktionsplan (
-    PlanID VARCHAR(10),
-    AuftragID VARCHAR(10),
-    ZugmodellID VARCHAR(10),
-    Startdatum TEXT, -- DATE
-    Enddatum TEXT, -- DATE
-    ParentPlanID INT,
-    Status VARCHAR(50)
+    PlanID          VARCHAR(10),
+    AuftragID       VARCHAR(10),
+    ZugID           VARCHAR(10),
+    Startdatum      TEXT, -- DATE 'YYYY-MM-DD'
+    Enddatum        TEXT, -- DATE 'YYYY-MM-DD'
+    ParentPlanID    INT,
+    Status          VARCHAR(50)
 );
 
 CREATE TABLE Komponente (
-    KomponenteID VARCHAR(10),
-    Name VARCHAR(100),
-    Typ VARCHAR(50),
-    Lagerbestand INT
+    KomponenteID    VARCHAR(10),
+    Name            VARCHAR(100),
+    Typ             VARCHAR(50),
+    Lagerbestand    INT,
+    Preis           DECIMAL(10, 2)
 );
 
 -- Tabelle fuer die Zuordnung von Auftraegen zu Zugmodellen erstellen
 CREATE TABLE AuftragZugmodell (
-    AuftragID VARCHAR(10),
-    ZugmodellID VARCHAR(10),
+    AuftragID       VARCHAR(10),
+    ZugID           VARCHAR(10),
+    Anzahl          INT
 );
 
 -- Tabelle fuer ZugmodellKomponente (Zugmodell und Komponente Verbindung)
 CREATE TABLE ZugmodellKomponente (
-    ZugmodellID VARCHAR(10),
-    KomponenteID VARCHAR(10),
-    Anzahl INT,
+    ZugID           VARCHAR(10),
+    KomponenteID    VARCHAR(10),
+    Anzahl          INT
  );
 
 INSERT INTO Kunde (KundeID, Name, Email, Adresse) VALUES 
@@ -93,7 +97,7 @@ INSERT INTO Auftrag (AuftragID, KundeID, Bestelldatum, Lieferdatum, Status) VALU
 ('A38672', 'K12347', '2023-03-20', '2023-06-10', 'in Bearbeitung'),
 ('A38673', 'K12347', '2023-03-25', '2023-06-15', 'abgeschlossen');
 
-INSERT INTO Zugmodell (ZugmodellID, Name, Typ, Kapazitaet) VALUES 
+INSERT INTO Zugmodell ( ZugID, Name, Typ, Kapazitaet) VALUES 
 ('Z59473', 'Modell A', 'Hochgeschwindigkeit', 250),
 ('Z59474', 'Modell B', 'Regionalzug', 180),
 ('Z59475', 'Modell C', 'Stadtbahn', 100),
@@ -148,7 +152,7 @@ INSERT INTO ProduktionsplanKomponente (PlanID, KomponenteID) VALUES
 ('P47624', 'K52793'),
 ('P47624', 'K52794');
 
-INSERT INTO AuftragZugmodell (AuftragID, ZugmodellID) VALUES
+INSERT INTO AuftragZugmodell (AuftragID,  ZugID) VALUES
 ('A38660', 'Z59475'),
 ('A38661', 'Z59476'),
 ('A38662', 'Z59477'),
