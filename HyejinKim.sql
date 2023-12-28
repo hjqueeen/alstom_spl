@@ -88,18 +88,20 @@ INSERT INTO ProduktionsplanKomponente (PlanID, KomponenteID) VALUES
 -- ABFRAGEN --
 -- ######## --
 
+-- Um den Gesamtstatus der Produktionsplaene fuer jeden Auftrag anzuzeigen
+-- Ein Alias ​​wird verwendet, da beide Tabellen eine Spalte „Status“ haben.
+SELECT A.AuftragID, A.KundeID, A.Bestelldatum, A.Lieferdatum, A.Status AS AuftragsStatus, P.PlanID, P.Status AS ProduktionsplanStatus
+FROM Auftrag A, Produktionsplan P 
+WHERE A.AuftragID = P.AuftragID;
+
 -- Um alle Auftraege eines bestimmten Kunden zusammen mit den Details des Zugmodells zu erhalten
+-- JOIN wird anstelle von WHERE verwendet, um bedingte Anweisungen besser sichtbar zu machen.
 SELECT K.KundeID, K.Name, A.AuftragID, A.Bestelldatum, A.Lieferdatum, A.Status, Z.ZugmodellID, Z.Name AS ZugmodellName
 FROM Kunde K
 JOIN Auftrag A ON K.KundeID = A.KundeID
 JOIN AuftragZugmodell AZ ON A.AuftragID = AZ.AuftragID
 JOIN Zugmodell Z ON AZ.ZugmodellID = Z.ZugmodellID
 WHERE K.KundeID = 'K12345'; 
-
--- Um den Gesamtstatus der Produktionsplaene fuer jeden Auftrag anzuzeigen 
-SELECT A.AuftragID, A.KundeID, A.Bestelldatum, A.Lieferdatum, A.Status AS AuftragsStatus, P.PlanID, P.Status AS ProduktionsplanStatus
-FROM Auftrag A
-JOIN Produktionsplan P ON A.AuftragID = P.AuftragID;
 
 -- Anzahl der Auftraege pro Kunde ermitteln
 SELECT K.KundeID, K.Name, COUNT(A.AuftragID) AS AnzahlAuftraege

@@ -22,7 +22,20 @@ INSERT INTO Auftrag (AuftragID, KundeID, Bestelldatum, Lieferdatum, Status) VALU
 ('A38666', 'K12353', '2023-02-20', '2023-05-05', 'in Bearbeitung'),
 ('A38667', 'K12354', '2023-02-25', '2023-05-10', 'abgeschlossen');
 
-;
+-- Kunde K12345 gibt eine zusätzliche Bestellung auf
+INSERT INTO Auftrag (AuftragID, KundeID, Bestelldatum, Lieferdatum, Status) VALUES
+('A38668', 'K12345', '2023-03-01', '2023-05-20', 'in Bearbeitung');
+
+-- Kunde K12346 gibt zwei zusätzliche Bestellungen auf
+INSERT INTO Auftrag (AuftragID, KundeID, Bestelldatum, Lieferdatum, Status) VALUES
+('A38669', 'K12346', '2023-03-05', '2023-05-25', 'abgeschlossen'),
+('A38670', 'K12346', '2023-03-10', '2023-06-01', 'in Bearbeitung');
+
+-- Kunde K12347 gibt drei zusätzliche Bestellungen auf
+INSERT INTO Auftrag (AuftragID, KundeID, Bestelldatum, Lieferdatum, Status) VALUES
+('A38671', 'K12347', '2023-03-15', '2023-06-05', 'abgeschlossen'),
+('A38672', 'K12347', '2023-03-20', '2023-06-10', 'in Bearbeitung'),
+('A38673', 'K12347', '2023-03-25', '2023-06-15', 'abgeschlossen');
 
 INSERT INTO Zugmodell (ZugmodellID, Name, Typ, Kapazitaet) VALUES 
 ('Z59473', 'Modell A', 'Hochgeschwindigkeit', 250),
