@@ -1,3 +1,59 @@
+-- ############ --
+-- CREATE TABLE --
+-- ############ --
+
+CREATE TABLE Kunde (
+    KundeID VARCHAR(10),
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Adresse VARCHAR(100)
+);
+
+CREATE TABLE Auftrag (
+    AuftragID VARCHAR(10),
+    KundeID VARCHAR(10),
+    Bestelldatum TEXT, -- DATE
+    Lieferdatum TEXT, -- DATE
+    Status VARCHAR(50)
+);
+
+CREATE TABLE Zugmodell (
+    ZugmodellID VARCHAR(10),
+    Name VARCHAR(100),
+    Typ VARCHAR(50),
+    Kapazitaet INT
+);
+
+CREATE TABLE Produktionsplan (
+    PlanID VARCHAR(10),
+    AuftragID VARCHAR(10),
+    ZugmodellID VARCHAR(10),
+    Startdatum TEXT, -- DATE
+    Enddatum TEXT, -- DATE
+    ParentPlanID INT,
+    Status VARCHAR(50)
+);
+
+CREATE TABLE Komponente (
+    KomponenteID VARCHAR(10),
+    Name VARCHAR(100),
+    Typ VARCHAR(50),
+    Lagerbestand INT
+);
+
+-- Tabelle fuer die Zuordnung von Auftraegen zu Zugmodellen erstellen
+CREATE TABLE AuftragZugmodell (
+    AuftragID VARCHAR(10),
+    ZugmodellID VARCHAR(10),
+);
+
+-- Tabelle fuer ZugmodellKomponente (Zugmodell und Komponente Verbindung)
+CREATE TABLE ZugmodellKomponente (
+    ZugmodellID VARCHAR(10),
+    KomponenteID VARCHAR(10),
+    Anzahl INT,
+ );
+
 INSERT INTO Kunde (KundeID, Name, Email, Adresse) VALUES 
 ('K12345', 'Max Mueller', 'max.mueller@email.com', 'Musterstraße 1, Stadt'),
 ('K12346', 'Anna Schmidt', 'anna.schmidt@email.com', 'Beispielweg 2, Stadt'),

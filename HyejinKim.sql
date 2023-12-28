@@ -111,11 +111,11 @@ GROUP BY K.KundeID, K.Name;
 
 SELECT P.PlanID, MAX(KomponentenAnzahl) AS AvgKomponenten
 FROM (
-    SELECT PK.PlanID, SUM(K.Lagerbestand) AS KomponentenAnzahl
+    SELECT PK.PlanID, K.KomponenteID, SUM(K.Lagerbestand) AS KomponentenAnzahl
     FROM Komponente K
     JOIN ProduktionsplanKomponente PK ON PK.KomponenteID = K.KomponenteID
     JOIN Produktionsplan P ON PK.PlanID = P.PlanID
-    GROUP BY PK.PlanID
+    GROUP BY  K.KomponenteID
 ) AS P
 GROUP BY P.PlanID;
 
