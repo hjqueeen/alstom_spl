@@ -74,6 +74,24 @@ INSERT INTO Komponente (KomponenteID, Name, Typ, Lagerbestand) VALUES
 ('K52792', 'Lichter', 'Elektronik', 100),
 ('K52793', 'Räder', 'Mechanik', 80);
 
+-- Dem Produktionsplan P47622 wird eine weitere Komponente hinzugefügt
+INSERT INTO ProduktionsplanKomponente (PlanID, KomponenteID) VALUES
+('P47622', 'K52790');
+
+-- Dem Produktionsplan P47623 werden drei weitere Komponenten hinzugefügt
+INSERT INTO ProduktionsplanKomponente (PlanID, KomponenteID) VALUES
+('P47623', 'K52789'),
+('P47623', 'K52790'),
+('P47623', 'K52791');
+
+-- Dem Produktionsplan P47624 werden fünf weitere Komponenten hinzugefügt
+INSERT INTO ProduktionsplanKomponente (PlanID, KomponenteID) VALUES
+('P47624', 'K52790'),
+('P47624', 'K52791'),
+('P47624', 'K52792'),
+('P47624', 'K52793'),
+('P47624', 'K52794');
+
 INSERT INTO AuftragZugmodell (AuftragID, ZugmodellID) VALUES
 ('A38660', 'Z59475'),
 ('A38661', 'Z59476'),

@@ -109,11 +109,11 @@ FROM Kunde K
 JOIN Auftrag A ON K.KundeID = A.KundeID 
 GROUP BY K.KundeID, K.Name;
 
--- Durchschnittliche Anzahl von Komponenten pro Produktionsplan ermitteln
-SELECT P.PlanID, AVG(KomponentenAnzahl) AS DurchschnittlicheAnzahlKomponenten
+SELECT P.PlanID, MAX(KomponentenAnzahl) AS AvgKomponenten
 FROM (
-    SELECT PK.PlanID, COUNT(PK.KomponenteID) AS KomponentenAnzahl
-    FROM ProduktionsplanKomponente PK
+    SELECT PK.PlanID, SUM(K.Lagerbestand) AS KomponentenAnzahl
+    FROM Komponente K
+    JOIN ProduktionsplanKomponente PK ON PK.KomponenteID = K.KomponenteID
     JOIN Produktionsplan P ON PK.PlanID = P.PlanID
     GROUP BY PK.PlanID
 ) AS P
